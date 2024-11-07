@@ -11,7 +11,6 @@ ${props =>
     css`
         font-size: 3rem;
         font-weight: 600;
-        background-color: yellow;
     `
 }  
 ${props => 
