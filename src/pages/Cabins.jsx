@@ -4,8 +4,10 @@ import Row from "../ui/Row";
 import { getCabins } from "../services/apiCabins";
 
 function Cabins() {
+
+  // Get the cabin data
   useEffect(() => {
-    getCabins().then(data => console.log(data));
+    getCabins().then(response => console.table(response))
   }, []);
 
   return (
