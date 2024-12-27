@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, cloneElement, useRef } from "react";
+import { createContext, useContext, useState, cloneElement } from "react";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import { createPortal } from "react-dom";

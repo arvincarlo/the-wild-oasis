@@ -32,6 +32,7 @@ function CreateCabinForm({cabinToEdit = {}, onCloseModal}) {
       editCabin({newCabinData: {...data, image}, id: editId}, {
         onSuccess: () => {
           reset();
+          onCloseModal?.();
         }
       })
     } else {
@@ -39,7 +40,7 @@ function CreateCabinForm({cabinToEdit = {}, onCloseModal}) {
       createCabin({...data, image}, {
         onSuccess: () => {
           reset();
-          onCloseModal?.()
+          onCloseModal?.();
         }
       });
     }
