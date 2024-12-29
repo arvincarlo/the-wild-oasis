@@ -34,8 +34,8 @@ function CabinTable() {
   const { cabins, isLoading, error } = useCabins();
   const [searchParams] = useSearchParams();
   const filterValue = searchParams.get("discount") || "all";
-  console.log(cabins, filterValue);
 
+  // 1. Filter
   let filteredCabins;
   switch(filterValue) {
     case "all":
@@ -51,7 +51,37 @@ function CabinTable() {
     break;
     default: filteredCabins = cabins;
   }
-  
+
+  // 2. Sort
+  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  // const [field, direction] = sortBy.split('-');
+  // const modifier = direction === 'asc' ? 1 : -1;
+  // const sortedCabins = filteredCabins?.sort((a, b) => (a[field] - b[field]) * modifier);
+  // console.log(sortedCabins, field);
+
+  let sortedCabins;
+
+  switch(sortBy) {
+    case "name-asc":
+      sortedCabins = filteredCabins?.sort((a, b) => a.name.localeCompare(b.name));
+    break;
+    case "name-desc":
+      sortedCabins = filteredCabins?.sort((a, b) => b.name.localeCompare(a.name));
+    break;
+    case "regularPrice-asc":
+      sortedCabins = filteredCabins?.sort((a, b) => a.regularPrice - b.regularPrice);
+    break;
+    case "regularPrice-desc":
+      sortedCabins = filteredCabins?.sort((a, b) => b.regularPrice - a.regularPrice);
+    break;
+    case "maxCapacity-asc":
+      sortedCabins = filteredCabins?.sort((a, b) => a.maxCapacity - b.maxCapacity);
+    break;
+    case "maxCapacity-desc":
+      sortedCabins = filteredCabins?.sort((a, b) => b.maxCapacity - a.maxCapacity);
+    break;
+    default: sortedCabins = filteredCabins;
+  }
 
   if(isLoading) return <Spinner></Spinner>
 
@@ -68,7 +98,7 @@ function CabinTable() {
           <div>Discount</div>
           <div></div>
         </Table.Header>
-        <Table.Body data={filteredCabins} render={(cabin, index) => <CabinRow key={index} cabin={cabin}></CabinRow>}/>
+        <Table.Body data={sortedCabins} render={(cabin, index) => <CabinRow key={index} cabin={cabin}></CabinRow>}/>
       </Table>
     </Menus>
   )
