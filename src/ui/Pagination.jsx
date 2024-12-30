@@ -64,7 +64,9 @@ function Pagination({count}) {
   
   // Getting the current page
   const pageCount = Math.ceil(count / PAGE_SIZE);
-  const currentPage = !searchParams.get('page') ? 1 : Number(searchParams.get("page")) < pageCount ? Number(searchParams.get("page")) : pageCount;
+  const pageValue = searchParams.get('page');
+  
+  const currentPage = (!pageValue || pageValue < 1) ? 1 : Number(pageValue) < pageCount ? Number(pageValue) : pageCount;
 
   if (pageCount <= 1) return null;
 

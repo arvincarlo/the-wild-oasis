@@ -19,8 +19,8 @@ export function useBookings() {
 
     // Getting the current page
     // const page = !searchParams.get('page') ? 1 : Number(searchParams.get("page")) < pageCount ? Number(searchParams.get("page")) : pageCount;
-
-    const page = !searchParams.get('page') ? 1 : Number(searchParams.get("page"));
+    const pageValue = searchParams.get('page');
+    const page = (!pageValue || pageValue < 1) ? 1 : Number(searchParams.get("page"));
 
     const { data: { data: bookings, count} = {}, isLoading, error } = useQuery({
         queryKey: ["bookings", filter, sortBy, page],
