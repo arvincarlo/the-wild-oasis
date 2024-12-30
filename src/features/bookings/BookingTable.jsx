@@ -7,11 +7,14 @@ import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
-  const { bookings, isLoading } = useBookings();
+  const { bookings, isLoading, count, error } = useBookings();
+  console.warn(error);
 
   if (isLoading) return <Spinner></Spinner>;
 
   if (!bookings.length) return <Empty resourceName="bookings"></Empty>
+
+  if (error) return <Empty resourceName="bookings"></Empty>
 
   return (
     <Menus>
@@ -32,7 +35,7 @@ function BookingTable() {
           )}
         />
         <Table.Footer>
-          <Pagination count={11}></Pagination>
+          <Pagination count={count}></Pagination>
         </Table.Footer>
       </Table>
     </Menus>
