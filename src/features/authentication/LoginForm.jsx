@@ -17,8 +17,16 @@ function LoginForm() {
     e.preventDefault();
     if (!email || !password) return;
 
-    // login here
-    login({ email, password });
+    // login here - mutate function
+    login({ email, password }, 
+      // onsettled function is a handler from mutation
+      {
+        onSettled: () => {
+          setEmail('');
+          setPassword('');
+        }
+      }
+    );
   }
 
   return (
