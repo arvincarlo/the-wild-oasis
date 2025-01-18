@@ -14,7 +14,7 @@ function useLogin() {
         onSuccess: (user) => {
             // setting query data, this basically allow us to set data into the react query cache
             queryClient.setQueriesData(["user"], user)
-            navigate('/dashboard');
+            navigate('/dashboard', { replace: true });
         },
         onError: (error) => {
             console.log("ERROR: ", error)
